@@ -10,7 +10,11 @@ if [ "${XDG_SESSION_TYPE:-}" = "wayland" ]; then
   echo "warning: this is a Wayland session; the skill needs X11 (pick an Xorg session at login)" >&2
 fi
 command -v xdotool >/dev/null || echo "missing xdotool: sudo apt install xdotool" >&2
-python3 -c "from PIL import ImageGrab" 2>/dev/null || echo "missing Pillow: sudo apt install python3-pil" >&2
+if ! python3 -c "import PIL" 2>/dev/null; then
+  echo "missing Pillow: sudo apt install python3-pil" >&2
+elif ! python3 -c "from PIL import features; assert features.check('xcb')" 2>/dev/null; then
+  echo "warning: this Pillow build lacks XCB support and cannot take screenshots" >&2
+fi
 
 mkdir -p "$(dirname "$dest")"
 if [ -e "$dest" ] && [ ! -L "$dest" ]; then

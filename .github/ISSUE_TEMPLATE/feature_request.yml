@@ -1,0 +1,16 @@
+name: Feature request
+description: Suggest a new command or behaviour
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do?
+      description: The task you wanted Claude to do on your desktop and where the skill fell short.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: The command, option or behaviour you have in mind, if any.

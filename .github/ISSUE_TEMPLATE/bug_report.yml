@@ -1,0 +1,46 @@
+name: Bug report
+description: Something doesn't work as documented
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you or Claude ran, what you expected, and what happened instead. Paste the exact cu.py output or error.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. python3 cu.py shot
+        2. python3 cu.py click 640 360
+    validations:
+      required: true
+  - type: input
+    id: distro
+    attributes:
+      label: Distribution and desktop
+      placeholder: Ubuntu 24.04, GNOME 46
+    validations:
+      required: true
+  - type: textarea
+    id: env
+    attributes:
+      label: Environment
+      description: Output of the commands below.
+      value: |
+        cu.py --version:
+        echo $XDG_SESSION_TYPE:
+        xdotool version:
+        python3 --version:
+        python3 -c "import PIL; print(PIL.__version__)":
+        xrandr | grep '*':
+    validations:
+      required: true
+  - type: textarea
+    id: screens
+    attributes:
+      label: Screenshots
+      description: Optional. Check them for private information before attaching.
