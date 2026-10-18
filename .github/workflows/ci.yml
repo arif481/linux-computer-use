@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install ruff
+      - run: ruff check .
+      - run: shellcheck install.sh
+      - name: Validate plugin manifests
+        run: for f in .claude-plugin/*.json; do python -m json.tool "$f" > /dev/null; done
+
+  unit:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - run: pip install pillow
+      - run: python -m unittest discover -s tests -v
+
+  integration:
+    # Real X server (Xvfb + openbox) with the distro's own xdotool, Pillow and Tk,
+    # i.e. the packages the README tells people to install.
+    name: integration (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-22.04, ubuntu-24.04]
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends xvfb xauth openbox xdotool python3-pil python3-tk
+      - name: Run all tests on a virtual display
+        env:
+          CU_INTEGRATION: "1"
+        run: |
+          xvfb-run -a -s "-screen 0 1920x1080x24" \
+            sh -c 'openbox & sleep 2; /usr/bin/python3 -m unittest discover -s tests -v'
