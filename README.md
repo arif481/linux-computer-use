@@ -73,6 +73,10 @@ Every action goes through one script, [`skills/linux-computer-use/scripts/cu.py`
 
 Images and state live in `$XDG_RUNTIME_DIR/claude-cu-<uid>` (falling back to `/tmp`), created with mode 0700. The script refuses to use that path if it is a symlink or owned by another user. Set `CU_DIR` to use a different directory.
 
+### What it runs and sends
+
+The script runs `xdotool` and reads the screen through Pillow. It makes no network requests, downloads nothing and installs nothing. Claude reads each screenshot the same way it reads any file in Claude Code, so the images it looks at are sent to the model as part of your conversation. Close anything you don't want Claude to see before asking it to use your desktop.
+
 ## Command reference
 
 You can run the script directly as well:
