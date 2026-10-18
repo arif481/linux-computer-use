@@ -1,0 +1,24 @@
+{
+  "name": "linux-computer-use",
+  "owner": {
+    "name": "Md Arifuzzaman",
+    "url": "https://github.com/arif481"
+  },
+  "metadata": {
+    "description": "Computer use for Claude Code on Linux (X11)",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "linux-computer-use",
+      "source": "./",
+      "description": "Lets Claude Code see and control a Linux X11 desktop: screenshots, clicks, typing, key combos, scrolling, dragging and window switching.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Md Arifuzzaman"
+      },
+      "category": "productivity",
+      "keywords": ["computer-use", "linux", "x11", "xdotool", "desktop", "automation"]
+    }
+  ]
+}
