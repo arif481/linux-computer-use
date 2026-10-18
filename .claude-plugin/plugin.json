@@ -1,5 +1,6 @@
 {
   "name": "linux-computer-use",
+  "displayName": "Linux Computer Use",
   "description": "Lets Claude Code see and control a Linux X11 desktop: screenshots, clicks, typing, key combos, scrolling, dragging and window switching, via xdotool and Pillow.",
   "version": "0.1.0",
   "author": {
@@ -8,6 +9,15 @@
   },
   "homepage": "https://github.com/arif481/linux-computer-use",
   "repository": "https://github.com/arif481/linux-computer-use",
+  "documentationUrl": "https://github.com/arif481/linux-computer-use#readme",
+  "supportUrl": "https://github.com/arif481/linux-computer-use/issues",
   "license": "MIT",
-  "keywords": ["computer-use", "linux", "x11", "xdotool", "desktop", "automation"]
+  "keywords": [
+    "computer-use",
+    "linux",
+    "x11",
+    "xdotool",
+    "desktop",
+    "automation"
+  ]
 }
